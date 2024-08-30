@@ -141,7 +141,7 @@ The final data will be in the form:
 
 These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
 
-```json
+```python3
 {'downloader/request_bytes': 1357,
  'downloader/request_count': 4,
  'downloader/request_method_count/GET': 4,

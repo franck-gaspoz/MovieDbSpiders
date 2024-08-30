@@ -52,6 +52,16 @@ class MovieSpider(CrawlSpider):
         data['writers'] = response.css('li[data-testid="title-pc-principal-credit"] > div')[1].css('ul > li > a::text').extract()
         data['stars'] = response.css('li[data-testid="title-pc-principal-credit"] > div')[2].css('ul > li > a::text').extract()
 
+        actors = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div > a::text').extract()
+        # img::attr(src)
+        actorsPics = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div')
+        actorsChs = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div+div > div')
+        t = [None] * len(actors)
+        for i, actor in enumerate(actors):
+            t[i] = { 'actor': actor, 'picUrl': None }
+            pic = actorsPics[i].css('img::attr(src)').extract()
+            if len(pic) > 0: t[i]['picUrl']=pic
+
         # pics
         data['minPicUrl'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['src']
         data['minPicWidth'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['width']

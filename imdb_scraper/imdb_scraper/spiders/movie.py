@@ -16,6 +16,7 @@ SEARCH_QUERY = (
 )
 
 QUERY_URL = 'https://www.imdb.com/search/title?'
+DEFAULT_FILTERS = 'countries=US&languages=FR&count=10'
 ATTR_TITLE = 'title'
 ATTR_MUTE = 'mute'
 ATTR_FILTERS = 'filters'
@@ -25,13 +26,12 @@ ATTR_FILTERS = 'filters'
 #
 # title                 movie title             default: ''
 # filters               query filters           default: ''
-# mute                  turn off all outputs    default: False
 
 # exemple filters:
 # user-rating           default: 1.0,10.0
 # countries             default: US
 # languages             default: EN
-# count                 max results
+# count                 max results: 10
 #
 # default filter:       countries=US&languages=FR&count=10
 #
@@ -55,22 +55,15 @@ class MovieSpider(CrawlSpider):
     @staticmethod
     def s(o): return o if o is not None else ''
 
-    @staticmethod
-    def b(o): return 'True' if o == True else 'False'
-
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         logging.basicConfig(level=logging.INFO)
 
         if kwargs is not None:
             self.title = kwargs[ATTR_TITLE] if ATTR_TITLE in kwargs else None
-            self.filters = kwargs[ATTR_FILTERS] if ATTR_FILTERS in kwargs else 'countries=US&languages=FR&count=10'
-            self.mute = kwargs[ATTR_MUTE] if ATTR_MUTE in kwargs else False
-        self.mute = True if self.mute == 'True' or self.mute == 'true' else False
-        if not self.mute:
+            self.filters = kwargs[ATTR_FILTERS] if ATTR_FILTERS in kwargs else DEFAULT_FILTERS
             self.logger.info(ATTR_TITLE+'='+MovieSpider.s(self.title))
             self.logger.info(ATTR_FILTERS+'='+MovieSpider.s(self.filters))
-            self.logger.info(ATTR_MUTE+'='+MovieSpider.b(self.mute) )
 
     def exf(self,selector):
         return selector.extract_first() if len(selector)>0 else None

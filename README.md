@@ -45,7 +45,16 @@ SEARCH_QUERY = (
 ```
 7. Start the crawler.
 ```
-(IMDBScraper/imdb_scraper) $ scrapy crawl movie --overwrite-output data/movie.json
+syntax:
+
+scrapy crawl movie [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filters=<FILTERS>]
+
+* default file: ./data/movie.json
+* -O <OUTPUT_FILE>      : write in file <OUTPUT_FILE>
+* -L <LOG_LEVEL>        : CRITICAL | ERROR | WARNING | INFO | DEBUG
+* -a title=<TITLE>      : search movie with <TITLE> (default: '')
+* -a filters=<FILTERS>  : query filters. reference is https://www.imdb.com/search/title? (default: 'countries=US&languages=FR&count=10')
+
 ```
 get helps about the command:
 ```

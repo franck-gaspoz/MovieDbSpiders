@@ -28,10 +28,10 @@ ATTR_FILTERS = 'filters'
 # filters               query filters           default: ''
 
 # exemple filters:
-# user-rating           default: 1.0,10.0
-# countries             default: US
-# languages             default: EN
-# count                 max results: 10
+# user-rating           1.0,10.0
+# countries             US
+# languages             EN
+# count                 10
 #
 # default filter:       countries=US&languages=FR&count=10
 #

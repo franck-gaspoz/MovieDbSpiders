@@ -55,6 +55,15 @@ scrapy crawl movie [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filt
 * -a title=<TITLE>      : search movie with <TITLE> (default: '')
 * -a filters=<FILTERS>  : query filters. reference is https://www.imdb.com/search/title? (default: 'countries=US&languages=FR&count=10')
 
+# exemple filters:
+# user-rating           1.0,10.0
+# countries             US
+# languages             EN
+# count                 10
+
+example:
+
+(IMDBScraper/imdb_scraper) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
 ```
 get helps about the command:
 ```

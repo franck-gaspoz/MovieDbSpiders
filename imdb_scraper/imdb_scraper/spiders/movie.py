@@ -1,25 +1,4 @@
 # -*- coding: utf-8 -*-
-import scrapy
-import logging
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy.linkextractors import LinkExtractor
-from scrapy.utils.response import open_in_browser
-
-SEARCH_QUERY = (
-    'https://www.imdb.com/search/title?'
-    'title_type=feature&'
-    'user_rating=1.0,10.0&'
-    'countries=us&'
-    'languages=en&'
-    'count=1&'
-    'view=simple'
-)
-
-QUERY_URL = 'https://www.imdb.com/search/title?'
-DEFAULT_FILTERS = 'countries=US&languages=FR&count=10'
-ATTR_TITLE = 'title'
-ATTR_MUTE = 'mute'
-ATTR_FILTERS = 'filters'
 
 #
 # parameters (-a name=value)
@@ -38,11 +17,20 @@ ATTR_FILTERS = 'filters'
 # must form a valid query, for example: title_type=feature&languages=fr
 #
 
+import logging
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
+
+QUERY_URL = 'https://www.imdb.com/search/title?'
+DEFAULT_FILTERS = 'countries=US&languages=FR&count=10'
+ATTR_TITLE = 'title'
+ATTR_MUTE = 'mute'
+ATTR_FILTERS = 'filters'
+
+
 class MovieSpider(CrawlSpider):
     name = 'movie'
     allowed_domains = ['imdb.com']
-    start_urls = [SEARCH_QUERY]
-
     rules = (Rule(
         LinkExtractor(
             # pages of details
@@ -53,28 +41,39 @@ class MovieSpider(CrawlSpider):
     ),)
 
     @staticmethod
-    def s(o): return o if o is not None else ''
+    def s(o):
+        return o if o is not None else ''
 
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
-        logging.basicConfig(level=logging.INFO)
+    @staticmethod
+    def q(name, value):
+        return name + '=' + value if value is not None else ''
+
+    def __init__(self, **kwargs):
 
         if kwargs is not None:
             self.title = kwargs[ATTR_TITLE] if ATTR_TITLE in kwargs else None
             self.filters = kwargs[ATTR_FILTERS] if ATTR_FILTERS in kwargs else DEFAULT_FILTERS
-            self.logger.info(ATTR_TITLE+'='+MovieSpider.s(self.title))
-            self.logger.info(ATTR_FILTERS+'='+MovieSpider.s(self.filters))
+            self.logger.info(ATTR_TITLE + '=' + MovieSpider.s(self.title))
+            self.logger.info(ATTR_FILTERS + '=' + MovieSpider.s(self.filters))
 
-    def exf(self,selector):
-        return selector.extract_first() if len(selector)>0 else None
+        title = MovieSpider.q(ATTR_TITLE, self.title)
+        sep1 = '&' if title is not None else ''
+        filters = MovieSpider.q(ATTR_FILTERS, self.filters)
+        self.start_urls = [QUERY_URL + title + sep1 + filters]
 
-    def ex(self,selector):
-        return selector.extract() if len(selector)>0 else None
+        super().__init__(**kwargs)
 
-    def atr(self,selector,attr):
-        return selector.attrib[attr] if len(selector)>0 else None
+    def exf(self, selector):
+        return selector.extract_first() if len(selector) > 0 else None
 
-    def isUrl(self,text): return text.startswith('http')
+    def ex(self, selector):
+        return selector.extract() if len(selector) > 0 else None
+
+    def atr(self, selector, attr):
+        return selector.attrib[attr] if len(selector) > 0 else None
+
+    def isUrl(self, text):
+        return text.startswith('http')
 
     def parse_detail_page(self, response):
 
@@ -87,41 +86,47 @@ class MovieSpider(CrawlSpider):
         data['title'] = self.exf(response.css('h1 > span::text'))
 
         data['summary'] = self.exf(response.css('div[data-testid="interests"]+p > span::text'))
-        data['interests'] = self.ex(response.css('div[data-testid="interests"] > div[class*="scroll"] > a > span::text'))
+        data['interests'] = self.ex(
+            response.css('div[data-testid="interests"] > div[class*="scroll"] > a > span::text'))
 
-        data['rating'] = self.exf(response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text'))
+        data['rating'] = self.exf(
+            response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text'))
         r = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text')
-        data['ratingCount'] = r.extract()[2] if len(r)>2 else None
+        data['ratingCount'] = r.extract()[2] if len(r) > 2 else None
         data['duration'] = self.exf(response.css('ul[role="presentation"] > li::text'))
         r = response.css('ul[role="presentation"] > li::text')
         data['releaseDate'] = r.extract()[1] if len(r) > 1 else None
         r = response.css('ul[role="presentation"] > li::text')
-        t = self.ex(r)[1].split(' ') if len(r)>1 else None
-        data['year'] = t[2] if t is not None and len(t)>2 else None
-        data['vote'] = self.exf(response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"]+div+div::text'))
+        t = self.ex(r)[1].split(' ') if len(r) > 1 else None
+        data['year'] = t[2] if t is not None and len(t) > 2 else None
+        data['vote'] = self.exf(
+            response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"]+div+div::text'))
 
         # main crew
-        data['director'] = self.exf(response.css('li[data-testid="title-pc-principal-credit"] > div > ul > li > a::text'))
+        data['director'] = self.exf(
+            response.css('li[data-testid="title-pc-principal-credit"] > div > ul > li > a::text'))
         t = response.css('li[data-testid="title-pc-principal-credit"] > div')
-        data['writers'] = self.ex(t[1].css('ul > li > a::text')) if len(t)>1 else None
+        data['writers'] = self.ex(t[1].css('ul > li > a::text')) if len(t) > 1 else None
         t = response.css('li[data-testid="title-pc-principal-credit"] > div')
         data['stars'] = self.ex(t[2].css('ul > li > a::text')) if len(t) > 2 else None
 
         # actors
 
-        actors = self.ex(response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div > a::text'))
+        actors = self.ex(
+            response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div > a::text'))
         actorsPics = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div')
         actorsChs = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div+div > div')
         t = [None] * len(actors)
         if actors is not None:
             for i, actor in enumerate(actors):
-                t[i] = { 'actor': actor, 'picUrl': None }
+                t[i] = {'actor': actor, 'picUrl': None}
                 pic = self.ex(actorsPics[i].css('img::attr(src)'))
-                if pic is not None: t[i]['picUrl']=pic
-                chs = self.ex(actorsChs[i].css('span::text'))
-                t[i]['characters']=chs
+                if pic is not None: t[i]['picUrl'] = pic
+                chs = self.ex(actorsChs[i].css('span::text')) if len(actorsChs) > i else None
+                t[i]['characters'] = chs
             data['actors'] = t
-        else: data['actors'] = None
+        else:
+            data['actors'] = None
 
         # anecdotes
 
@@ -129,21 +134,23 @@ class MovieSpider(CrawlSpider):
         if t is not None:
             t = ''.join(t).split('.')
             data['anecdotes'] = '.'.join(t)
-        else: data['anecdotes']
+        else:
+            data['anecdotes'] = None
 
         # pics
-        data['minPicUrl'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'),'src')
-        data['minPicWidth'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'),'width')
-        data['minPicAlt'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'),'alt')
-        a = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'),'srcset')
-        data['picsUrls'] = list(filter(self.isUrl , a.split(' '))) if a is not None else None
+        data['minPicUrl'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'), 'src')
+        data['minPicWidth'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'), 'width')
+        data['minPicAlt'] = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'), 'alt')
+        a = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'), 'srcset')
+        data['picsUrls'] = list(filter(self.isUrl, a.split(' '))) if a is not None else None
         if data['picsUrls'] is not None:
             picdef = data['picsUrls'][0]
             t = picdef.split('.')
             t.pop()
             data['picFullUrl'] = '.'.join(t).split(',')[0]
-        else: data['picFullUrl'] = None
-        a = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'),'sizes')
+        else:
+            data['picFullUrl'] = None
+        a = self.atr(response.css('div[data-testid="hero-media__poster"] > div > img'), 'sizes')
         data['picsSizes'] = a.split(',') if a is not None else None
 
         return data

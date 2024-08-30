@@ -63,7 +63,9 @@ example:
 
 (IMDBScraper/imdb_scraper) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
 ```
-get helps about the command:
+You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and 
+put it into the `filters` parameter in the command line
+
 ```
 (IMDBScraper/imdb_scraper) $ scrapy crawl -h
 ```

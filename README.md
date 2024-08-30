@@ -47,6 +47,11 @@ SEARCH_QUERY = (
 ```
 (IMDBScraper/imdb_scraper) $ scrapy crawl movie --overwrite-output data/movie.json
 ```
+get helps about the command:
+```
+(IMDBScraper/imdb_scraper) $ scrapy crawl -h
+```
+
 8. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/imdb_scraper/data/movie.json`.
 
 

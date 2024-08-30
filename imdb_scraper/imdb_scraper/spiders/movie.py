@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import logging
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.utils.response import open_in_browser
@@ -14,6 +15,29 @@ SEARCH_QUERY = (
     'view=simple'
 )
 
+QUERY_URL = 'https://www.imdb.com/search/title?'
+ATTR_TITLE = 'title'
+ATTR_MUTE = 'mute'
+ATTR_FILTERS = 'filters'
+
+#
+# parameters (-a name=value)
+#
+# title                 movie title             default: ''
+# filters               query filters           default: ''
+# mute                  turn off all outputs    default: False
+
+# exemple filters:
+# user-rating           default: 1.0,10.0
+# countries             default: US
+# languages             default: EN
+# count                 max results
+#
+# default filter:       countries=US&languages=FR&count=10
+#
+# must form a valid query, for example: title_type=feature&languages=fr
+#
+
 class MovieSpider(CrawlSpider):
     name = 'movie'
     allowed_domains = ['imdb.com']
@@ -25,8 +49,28 @@ class MovieSpider(CrawlSpider):
             allow=r".*/title/tt.*/?ref_=sr_t"
         ),
         follow=False,
-        callback='parse_query_page',
+        callback='parse_detail_page',
     ),)
+
+    @staticmethod
+    def s(o): return o if o is not None else ''
+
+    @staticmethod
+    def b(o): return 'True' if o == True else 'False'
+
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        logging.basicConfig(level=logging.INFO)
+
+        if kwargs is not None:
+            self.title = kwargs[ATTR_TITLE] if ATTR_TITLE in kwargs else None
+            self.filters = kwargs[ATTR_FILTERS] if ATTR_FILTERS in kwargs else 'countries=US&languages=FR&count=10'
+            self.mute = kwargs[ATTR_MUTE] if ATTR_MUTE in kwargs else False
+        self.mute = True if self.mute == 'True' or self.mute == 'true' else False
+        if not self.mute:
+            self.logger.info(ATTR_TITLE+'='+MovieSpider.s(self.title))
+            self.logger.info(ATTR_FILTERS+'='+MovieSpider.s(self.filters))
+            self.logger.info(ATTR_MUTE+'='+MovieSpider.b(self.mute) )
 
     def exf(self,selector):
         return selector.extract_first() if len(selector)>0 else None
@@ -39,9 +83,9 @@ class MovieSpider(CrawlSpider):
 
     def isUrl(self,text): return text.startswith('http')
 
-    def parse_query_page(self, response):
+    def parse_detail_page(self, response):
 
-        self.logger.info('parse_query_page:')
+        self.logger.info('parse_detail_page:')
         self.logger.info(response)
 
         data = {}

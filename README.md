@@ -1,5 +1,6 @@
 # IMDB Scraper
 
+![python](https://img.shields.io/static/v1?label=&message=Python&color=cdf998&style=plastic&logo=python)
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 
 ![linux](https://img.shields.io/static/v1?label=&message=Linux&color=285fdd&style=plastic&logo=linux) ![windows](https://img.shields.io/static/v1?label=&message=Windows&color=285fdd&style=plastic&logo=windows&logoColor=77DDFF) ![osx](https://img.shields.io/static/v1?label=&message=OSX&color=285fdd&style=plastic&logo=apple&logoColor=AAFFAA)
 
@@ -16,19 +17,19 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 1. Clone the repo and navigate into `IMDB-Scraper` folder.
 ```
 $ git clone https://github.com/franck-gaspoz/IMDBScraper.git
-$ cd IMDB-Scraper/
+$ cd IMDBScraper/
 ```
 2. Create and activate a virtual environment.
 ```
-(IMDB-Scraper) $ pipenv shell
+(IMDBScraper/imdb_scraper) $ pipenv shell
 ```
 3. Install all dependencies.
 ```
-(IMDB-Scraper) $ pipenv install
+(IMDBScraper/imdb_scraper)$ pipenv install
 ```
 4. Navigate into `imdb_scraper` folder.
 ```
-(IMDB-Scraper) $ cd imdb_scraper/
+(IMDBScraper/imdb_scraper) $ cd imdb_scraper/
 ```
 5. You can change the starting page of the crawler in the file `imdb_scraper/spiders/movie.py` by changing the `SEARCH_QUERY` variable. You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and paste it in place of default url. By default:
 ```python3
@@ -44,7 +45,7 @@ SEARCH_QUERY = (
 ```
 7. Start the crawler.
 ```
-(IMDBScrawler/imdb_scraper) $ scrapy crawl movie --overwrite-output data/movie.json
+(IMDBScraper/imdb_scraper) $ scrapy crawl movie --overwrite-output data/movie.json
 ```
 8. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/imdb_scraper/data/movie.json`.
 

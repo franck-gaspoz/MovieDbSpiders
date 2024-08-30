@@ -36,13 +36,21 @@ class MovieSpider(CrawlSpider):
 
         # global infos
         data['title'] = response.css('h1 > span::text').extract_first()
-        data['summary'] = ''
+
+        data['summary'] = response.css('div[data-testid="interests"]+p > span::text').extract_first()
+        data['interests'] = response.css('div[data-testid="interests"] > div[class*="scroll"] > a > span::text').extract()
+
         data['rating'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text').extract_first()
         data['ratingCount'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text').extract()[2]
         data['duration'] = response.css('ul[role="presentation"] > li::text').extract_first()
         data['releaseDate'] = response.css('ul[role="presentation"] > li::text').extract()[1]
         data['year'] = response.css('ul[role="presentation"] > li::text').extract()[1].split(' ')[2]
         data['vote'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"]+div+div::text').extract_first()
+
+        # main crew
+        data['director'] = response.css('li[data-testid="title-pc-principal-credit"] > div > ul > li > a::text').extract_first()
+        data['writers'] = response.css('li[data-testid="title-pc-principal-credit"] > div')[1].css('ul > li > a::text').extract()
+        data['stars'] = response.css('li[data-testid="title-pc-principal-credit"] > div')[2].css('ul > li > a::text').extract()
 
         # pics
         data['minPicUrl'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['src']

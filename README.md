@@ -14,7 +14,7 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 
 ### Crawlin
 
-1. Clone the repo and navigate into `IMDB-Scraper` folder.
+1. Clone the repo and navigate into `IMDBsScraper` folder.
 ```
 $ git clone https://github.com/franck-gaspoz/IMDBScraper.git
 $ cd IMDBScraper/

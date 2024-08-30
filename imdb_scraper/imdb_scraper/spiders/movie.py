@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
+from scrapy.utils.response import open_in_browser
 
 SEARCH_QUERY = (
     'https://www.imdb.com/search/title?'
@@ -8,10 +9,9 @@ SEARCH_QUERY = (
     'user_rating=1.0,10.0&'
     'countries=us&'
     'languages=en&'
-    'count=250&'
+    'count=1&'
     'view=simple'
 )
-
 
 class MovieSpider(CrawlSpider):
     name = 'movie'
@@ -19,26 +19,46 @@ class MovieSpider(CrawlSpider):
     start_urls = [SEARCH_QUERY]
 
     rules = (Rule(
-        LinkExtractor(restrict_css=('div.desc a')),
-        follow=True,
+        LinkExtractor(
+            #restrict_css=('div.desc a')
+            allow=r".*/title/tt.*/?ref_"
+        ),
+        follow=False,
         callback='parse_query_page',
     ),)
 
     def parse_query_page(self, response):
-        links = response.css('span.lister-item-header a::attr(href)').extract()
-        for link in links:
-            yield response.follow(link, callback=self.parse_movie_detail_page)
 
-    def parse_movie_detail_page(self, response):
+        self.logger.info('parse_query_page:')
+        self.logger.info(response)
+
         data = {}
-        data['title'] = response.css('h1::text').extract_first().strip()
-        data['rating'] = response.css(
-            '.subtext::text').extract_first().strip() or None
-        data['year'] = response.css('#titleYear a::text').extract_first()
-        data['users_rating'] = response.xpath(
-            '//span[contains(@itemprop, "ratingValue")]/text()').extract_first()
-        data['votes'] = response.xpath(
-            '//span[contains(@itemprop, "ratingCount")]/text()').extract_first()
+
+        # global infos
+        data['title'] = response.css('h1 > span::text').extract_first()
+        data['summary'] = ''
+        data['rating'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text').extract_first()
+        data['ratingCount'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"] > span::text').extract()[2]
+        data['duration'] = response.css('ul[role="presentation"] > li::text').extract_first()
+        data['releaseDate'] = response.css('ul[role="presentation"] > li::text').extract()[1]
+        data['year'] = response.css('ul[role="presentation"] > li::text').extract()[1].split(' ')[2]
+        data['vote'] = response.css('div[data-testid="hero-rating-bar__aggregate-rating__score"]+div+div::text').extract_first()
+
+        # pics
+        data['minPicUrl'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['src']
+        data['minPicWidth'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['width']
+        data['minPicAlt'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['alt']
+        data['picsUrls'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['srcset'].split(' ')
+        picdef = data['picsUrls'][0]
+        t = picdef.split('.')
+        t.pop()
+        data['picFullUrl'] = '.'.join(t).split(',')[0]
+        data['picsSizes'] = response.css('div[data-testid="hero-media__poster"] > div > img').attrib['sizes'].split(',')
+
+        # casting
+
+        #open_in_browser(response)
+
         data['metascore'] = response.xpath(
             '//div[contains(@class, "metacriticScore")]/span/text()').extract_first()
         data['img_url'] = response.xpath(

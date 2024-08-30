@@ -22,7 +22,7 @@ class MovieSpider(CrawlSpider):
     rules = (Rule(
         LinkExtractor(
             # pages of details
-            allow=r".*/title/tt.*/?ref_"
+            allow=r".*/title/tt.*/?ref_=sr_t"
         ),
         follow=False,
         callback='parse_query_page',
@@ -45,7 +45,6 @@ class MovieSpider(CrawlSpider):
         self.logger.info(response)
 
         data = {}
-        #scrapy.Item()
 
         # global infos
         data['title'] = self.exf(response.css('h1 > span::text'))
@@ -71,8 +70,9 @@ class MovieSpider(CrawlSpider):
         t = response.css('li[data-testid="title-pc-principal-credit"] > div')
         data['stars'] = self.ex(t[2].css('ul > li > a::text')) if len(t) > 2 else None
 
+        # actors
+
         actors = self.ex(response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div > a::text'))
-        # img::attr(src)
         actorsPics = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div')
         actorsChs = response.css('div[data-testid="shoveler-items-container"][class*="wraps"] > div > div+div > div')
         t = [None] * len(actors)

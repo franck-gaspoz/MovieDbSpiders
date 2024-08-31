@@ -6,5 +6,5 @@ settings = get_project_settings()
 
 # Create a process
 process = CrawlerProcess( settings )
-process.crawl(MovieSpider)
+process.crawl('movie')
 process.start()

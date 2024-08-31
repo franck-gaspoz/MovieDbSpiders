@@ -29,19 +29,8 @@ $ cd IMDBScraper/
 ```
 (IMDBScraper/imdb_scraper) $ cd imdb_scraper/
 ```
-5. You can change the starting page of the crawler in the file `imdb_scraper/spiders/movie.py` by changing the `SEARCH_QUERY` variable. You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and paste it in place of default url. By default:
-```python3
-SEARCH_QUERY = (
-    'https://www.imdb.com/search/title?'
-    'title_type=feature&'
-    'user_rating=1.0,10.0&'
-    'countries=us&'
-    'languages=en&'
-    'count=250&'
-    'view=simple'
-)
-```
-7. Start the crawler.
+
+5. Start the crawler.
 ```
 syntax:
 
@@ -63,6 +52,7 @@ example:
 
 (IMDBScraper/imdb_scraper) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
 ```
+
 You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and 
 put it into the `filters` parameter in the command line
 
@@ -70,7 +60,7 @@ put it into the `filters` parameter in the command line
 (IMDBScraper/imdb_scraper) $ scrapy crawl -h
 ```
 
-8. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/imdb_scraper/data/movie.json`.
+6. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/imdb_scraper/data/movie.json`.
 
 
 The final data will be in the form:

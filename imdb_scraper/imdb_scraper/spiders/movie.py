@@ -82,6 +82,13 @@ class MovieSpider(CrawlSpider):
 
         data = {}
 
+        # ids
+
+        data['url'] = response.url.split('?')[0]
+        t = response.url.split('?')[0].split('/')
+        t = list(filter(lambda x: x != '',t))
+        data['id'] = t.pop()
+
         # global infos
         data['title'] = self.exf(response.css('h1 > span::text'))
 

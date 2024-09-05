@@ -1,4 +1,4 @@
-# IMDB Scraper
+# Movie Db Scraper
 
 ![python](https://img.shields.io/static/v1?label=&message=Python&color=cdf998&style=plastic&logo=python)
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 

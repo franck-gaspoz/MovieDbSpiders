@@ -10,6 +10,11 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 
 - This project is a based on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
 
+## Todo
+
+- Api HTTP restful
+- integrate more scrapers sources
+
 ### Crawlin
 
 1. Clone the repo and navigate into `IMDBsScraper` folder.

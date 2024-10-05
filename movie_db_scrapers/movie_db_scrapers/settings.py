@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-BOT_NAME = 'imdb_scraper'
+BOT_NAME = 'movie_db_scrapers'
 
-SPIDER_MODULES = ['imdb_scraper.spiders']
-NEWSPIDER_MODULE = 'imdb_scraper.spiders'
+SPIDER_MODULES = ['movie_db_scrapers.spiders']
+NEWSPIDER_MODULE = 'movie_db_scrapers.spiders'
 
 # Saving the output in json format
 # FEED_URI = 'data/%(name)s.json'

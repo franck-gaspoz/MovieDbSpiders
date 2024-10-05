@@ -47,22 +47,22 @@ $ cd IMDBScraper/
 ```
 2. Create and activate a virtual environment.
 ```bash
-(IMDBScraper/imdb_scraper) $ pipenv shell
+(IMDBScraper) $ pipenv shell
 ```
 3. Install all dependencies.
 ```bash
-(IMDBScraper/imdb_scraper)$ pipenv install
+(IMDBScraper)$ pipenv install
 ```
 4. Navigate into `imdb_scraper` folder.
 ```bash
-(IMDBScraper/imdb_scraper) $ cd imdb_scraper/
+(IMDBScraper) $ cd movie_db_scrapers/
 ```
 
-5. Start the crawler.
+5. Start the crawler named `imdb` :
 ```
 syntax:
 
-scrapy crawl movie [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filters=<FILTERS>]
+scrapy crawl imdb [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filters=<FILTERS>]
 
 * default file: ./data/movie.json
 * -O <OUTPUT_FILE>      : write in file <OUTPUT_FILE>
@@ -78,20 +78,20 @@ scrapy crawl movie [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filt
 
 example:
 
-(IMDBScraper/imdb_scraper) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
+(IMDBScraper/movie_db_scrapers) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
 ```
 
 You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and 
 put it into the `filters` parameter in the command line
 
 ```bash
-(IMDBScraper/imdb_scraper) $ scrapy crawl -h
+(IMDBScraper/movie_db_scrapers) $ scrapy crawl -h
 ```
 
-6. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/imdb_scraper/data/movie.json`.
+6. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/movie_db_scrapers/data/movie.json`.
 
 
-The final data will be in the form:
+The final data will be structured like this (an object per movie in an array):
 
 ```json
 [{
@@ -216,7 +216,13 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
 
 ## Releases
 
-2024/05/20 - 1.0.0 initial version
+1.1.0 - 2024/05/20 - support for multiple spiders
+
+- refactoring: imdb-scrapper -> movie_db_scrappers
+- command line improvements (launcher.py)
+
+1.0.0 - 2024/05/20 - initial version
+
 - scrap from command line
 
 ## Notes

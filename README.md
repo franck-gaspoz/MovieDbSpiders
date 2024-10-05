@@ -1,4 +1,4 @@
-# IMDB Scraper
+# Movie Db Scraper
 
 ![python](https://img.shields.io/static/v1?label=&message=Python&color=cdf998&style=plastic&logo=python)
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 
@@ -6,9 +6,11 @@
 
 ## Overview
 
-This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used to crawl [IMDB](https://www.imdb.com/) website to scrape movies' information and then store the data in `json` format. 
+This is a [Scrapy](https://github.com/scrapy/scrapy) project to crawl movie 'databases' web sites.
+Currently these sites are supported:
+- [IMDB](https://www.imdb.com/)
 
-- This project is a based on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
+this software scrap movies' information and then store the data in `json` format. 
 
 ### Get & Run release
 
@@ -16,7 +18,7 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 
 - [MovieDbScrapper-Windows-64bit-intel-1.0.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.0.0)
 
-#### Usage
+#### Usage:
 
 ```bash
 # run the crawler:
@@ -39,20 +41,20 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 ### Install & run / develop
 
 1. Clone the repo and navigate into `IMDBsScraper` folder.
-```
+```bash
 $ git clone https://github.com/franck-gaspoz/IMDBScraper.git
 $ cd IMDBScraper/
 ```
 2. Create and activate a virtual environment.
-```
+```bash
 (IMDBScraper/imdb_scraper) $ pipenv shell
 ```
 3. Install all dependencies.
-```
+```bash
 (IMDBScraper/imdb_scraper)$ pipenv install
 ```
 4. Navigate into `imdb_scraper` folder.
-```
+```bash
 (IMDBScraper/imdb_scraper) $ cd imdb_scraper/
 ```
 
@@ -82,7 +84,7 @@ example:
 You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and 
 put it into the `filters` parameter in the command line
 
-```
+```bash
 (IMDBScraper/imdb_scraper) $ scrapy crawl -h
 ```
 
@@ -216,6 +218,10 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
 
 2024/05/20 - 1.0.0 initial version
 - scrap from command line
+
+## Notes
+
+This project is a based on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
 
 ## Disclaimer
 

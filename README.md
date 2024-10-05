@@ -10,7 +10,33 @@ This is a [Scrapy](https://github.com/scrapy/scrapy) project which can be used t
 
 - This project is a based on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
 
-### Crawlin
+### Get & Run release
+
+#### Download:
+
+- [MovieDbScrapper-Windows-64bit-intel-1.0.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.0.0)
+
+#### Usage
+
+```bash
+# run the crawler:
+#  - search for movies having <Title>
+#  - eventually use extended filters if specified in <Filters>
+#  - output tot 
+
+./movie-db-scrapper-1.0.0.exe OutputFile Title [Filters]
+
+# exemple:
+
+./movie-db-scrapper-1.0.0.exe movie.json "Any movie"
+
+```
+
+- `OutputFile`: relative or absolute path to the `Json` outputs
+- `Title` : search the title
+- `Filters` : optional filters. default is `countries=US&languages=FR&count=10`
+
+### Install & run / develop
 
 1. Clone the repo and navigate into `IMDBsScraper` folder.
 ```
@@ -185,6 +211,11 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
  'start_time': datetime.datetime(2024, 8, 30, 20, 53, 48, 347422, tzinfo=datetime.timezone.utc)
  }
  ```
+
+## Releases
+
+2024/05/20 - 1.0.0 initial version
+- scrap from command line
 
 ## Disclaimer
 

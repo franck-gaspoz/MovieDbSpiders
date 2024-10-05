@@ -12,19 +12,19 @@ Currently these sites are supported:
 
 this software scrap movies' information and then store the data in `json` format. 
 
-### Get & Run release
+## Get & Run release
 
-#### Download:
+### Download:
 
 - [MovieDbScrapper-Windows-64bit-intel-1.0.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.0.0)
 
-#### Usage:
+### Usage:
 
 ```bash
 # run the crawler:
 #  - search for movies having <Title>
 #  - eventually use extended filters if specified in <Filters>
-#  - output tot 
+#  - output to json files
 
 ./movie-db-scrapper-1.0.0.exe OutputFile Title [Filters]
 
@@ -38,7 +38,7 @@ this software scrap movies' information and then store the data in `json` format
 - `Title` : search the title
 - `Filters` : optional filters. default is `countries=US&languages=FR&count=10`
 
-### Install & run / develop
+## Install & run / develop
 
 1. Clone the repo and navigate into `IMDBsScraper` folder.
 ```bash
@@ -89,7 +89,6 @@ put it into the `filters` parameter in the command line
 ```
 
 6. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/movie_db_scrapers/data/movie.json`.
-
 
 The final data will be structured like this (an object per movie in an array):
 
@@ -213,6 +212,15 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
  'start_time': datetime.datetime(2024, 8, 30, 20, 53, 48, 347422, tzinfo=datetime.timezone.utc)
  }
  ```
+
+## Build a standalone executable
+
+```bash
+$ cd MovieDbScraper/movie_db_scrapers
+(MovieDbScraper/movie_db_scrapers) $ ./publish.bat
+```
+
+this will build a file `*.exe` in the `/dist` folder
 
 ## Releases
 

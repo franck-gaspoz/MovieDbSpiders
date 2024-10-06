@@ -1,0 +1,4 @@
+powershell setup venv
+
+$env:Path = $env:Path + ';C:\Users\franc\PycharmProjects\MovieDbScraper\venv\Scripts';
+$env:VIRTUAL_ENV = 'C:\Users\franc\PycharmProjects\MoviDbScraper\venv'

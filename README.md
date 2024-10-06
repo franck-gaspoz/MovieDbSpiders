@@ -220,7 +220,7 @@ $ cd MovieDbScraper/movie_db_scrapers
 (MovieDbScraper/movie_db_scrapers) $ ./publish.bat
 ```
 
-this will build a file `*.exe` in the `/dist` folder
+this will build a file `launcher.exe` in the `/dist` folder
 
 ## Releases
 

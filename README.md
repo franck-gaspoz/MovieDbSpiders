@@ -4,6 +4,9 @@
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 
 ![linux](https://img.shields.io/static/v1?label=&message=Linux&color=285fdd&style=plastic&logo=linux) ![windows](https://img.shields.io/static/v1?label=&message=Windows&color=285fdd&style=plastic&logo=windows&logoColor=77DDFF) ![osx](https://img.shields.io/static/v1?label=&message=OSX&color=285fdd&style=plastic&logo=apple&logoColor=AAFFAA)
 
+![release](https://img.shields.io/github/release-date-pre/franck-gaspoz/MovieDbScraper?&style=plastic&label=release)
+![release](https://img.shields.io/github/v/release/franck-gaspoz/MovieDbScraper?&style=plastic&label=)
+
 ## Overview
 
 This is a [Scrapy](https://github.com/scrapy/scrapy) project to crawl movie 'databases' web sites.
@@ -26,14 +29,16 @@ this software scrap movies' information and then store the data in `json` format
 #  - eventually use extended filters if specified in <Filters>
 #  - output to json files
 
-./movie-db-scrapper-1.0.0.exe OutputFile Title [Filters]
+# syntax :
+# ./movie-db-scrapper-1.0.0.exe <ScraperId> <OutputFile> <Title> [<Filters>]
 
 # exemple:
 
-./movie-db-scrapper-1.0.0.exe movie.json "Any movie"
+./movie-db-scrapper-1.0.0.exe imdb movie.json "Any movie" countries=US&languages=US&count=10
 
 ```
 
+- `SpiderId`: id of the spider to use
 - `OutputFile`: relative or absolute path to the `Json` outputs
 - `Title` : search the title
 - `Filters` : optional filters. default is `countries=US&languages=FR&count=10`

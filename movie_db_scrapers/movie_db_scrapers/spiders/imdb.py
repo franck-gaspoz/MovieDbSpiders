@@ -28,8 +28,8 @@ ATTR_MUTE = 'mute'
 ATTR_FILTERS = 'filters'
 
 
-class MovieSpider(CrawlSpider):
-    name = 'movie'
+class ImdbSpider(CrawlSpider):
+    name = 'imdb'
     allowed_domains = ['imdb.com']
     rules = (Rule(
         LinkExtractor(
@@ -53,12 +53,12 @@ class MovieSpider(CrawlSpider):
         if kwargs is not None:
             self.title = kwargs[ATTR_TITLE] if ATTR_TITLE in kwargs else None
             self.filters = kwargs[ATTR_FILTERS] if ATTR_FILTERS in kwargs else DEFAULT_FILTERS
-            self.logger.info(ATTR_TITLE + '=' + MovieSpider.s(self.title))
-            self.logger.info(ATTR_FILTERS + '=' + MovieSpider.s(self.filters))
+            self.logger.info(ATTR_TITLE + '=' + ImdbSpider.s(self.title))
+            self.logger.info(ATTR_FILTERS + '=' + ImdbSpider.s(self.filters))
 
-        title = MovieSpider.q(ATTR_TITLE, self.title)
+        title = ImdbSpider.q(ATTR_TITLE, self.title)
         sep1 = '&' if title is not None else ''
-        filters = MovieSpider.q(ATTR_FILTERS, self.filters)
+        filters = ImdbSpider.q(ATTR_FILTERS, self.filters)
         self.start_urls = [QUERY_URL + title + sep1 + filters]
 
         super().__init__(**kwargs)

@@ -20,22 +20,25 @@ sys.stdout.write('Filters: optional filters. default is countries=US&languages=F
 sys.stdout.write('\n')
 sys.stdout.write('syntax: outputFile title [filters]=countries=US&languages=FR&count=10\n\n')
 
-# parse args
-# outputFile title [filters]
-
+# default output file
 outputFile = 'result.json'
+# default title
 title = ''
+# default filters
 filters = None
+
+# parse args
+# spiderId outputFile title [filters]
 
 if len(sys.argv) > 1:
     outputFile = sys.argv[1]
 if len(sys.argv) > 2:
     title = sys.argv[2]
-if len(sys.argv) == 3:
+if len(sys.argv) > 3:
     filters = sys.argv[3]
-if len(sys.argv) == 1 or len(sys.argv)>3:
+if len(sys.argv) == 1 or len(sys.argv)>4:
     sys.stderr.write('bad number of parameters\n')
-    exit(0)
+    sys.exit(0)
 
 sys.stdout.write('outputFile='+outputFile+'\n')
 sys.stdout.write('title='+title+'\n')
@@ -53,9 +56,11 @@ settings.FEEDS[outputFile] = feeds
 
 # Create a process
 process = CrawlerProcess(settings)
+spider = 'imdb'
+
 if filters is not None:
-    process.crawl('movie', title=title, filters=filters)
+    process.crawl(spider, title=title, filters=filters)
 else:
-    process.crawl('movie', title=title )
+    process.crawl(spider, title=title )
 
 process.start()

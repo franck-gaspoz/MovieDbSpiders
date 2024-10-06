@@ -42,20 +42,20 @@ this software scrap movies' information and then store the data in `json` format
 
 1. Clone the repo and navigate into `IMDBsScraper` folder.
 ```bash
-$ git clone https://github.com/franck-gaspoz/IMDBScraper.git
-$ cd IMDBScraper/
+$ git clone https://github.com/franck-gaspoz/MovieDbScraper.git
+$ cd MovieDbScraper/
 ```
 2. Create and activate a virtual environment.
 ```bash
-(IMDBScraper) $ pipenv shell
+(MovieDbScraper) $ pipenv shell
 ```
 3. Install all dependencies.
 ```bash
-(IMDBScraper)$ pipenv install
+(MovieDbScraper)$ pipenv install
 ```
 4. Navigate into `imdb_scraper` folder.
 ```bash
-(IMDBScraper) $ cd movie_db_scrapers/
+(MovieDbScraper) $ cd movie_db_scrapers/
 ```
 
 5. Start the crawler named `imdb` :
@@ -78,17 +78,17 @@ scrapy crawl imdb [-O <OUTPUT_FILE>] -L <LOG_LEVEL> [-a title=<TITLE>] [-a filte
 
 example:
 
-(IMDBScraper/movie_db_scrapers) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
+(MovieDbScraper/movie_db_scrapers) $ scrapy crawl movie -O data/movie.json -L ERROR -a title="alien" -a filters="countries=US&languages=FR&count=10" 
 ```
 
 You can get your own query from here: [imdb.com/search/title](https://www.imdb.com/search/title). Copy the generated URL and 
 put it into the `filters` parameter in the command line
 
 ```bash
-(IMDBScraper/movie_db_scrapers) $ scrapy crawl -h
+(MovieDbScraper/movie_db_scrapers) $ scrapy crawl -h
 ```
 
-6. Data will be stored in `json` file named `movie.json` located at `IMDBScraper/movie_db_scrapers/data/movie.json`.
+6. Data will be stored in `json` file named `movie.json` located at `MovieDbScraper/movie_db_scrapers/data/movie.json`.
 
 The final data will be structured like this (an object per movie in an array):
 

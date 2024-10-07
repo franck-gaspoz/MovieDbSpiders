@@ -38,7 +38,7 @@ this software scrap movies' information and then store the data in `json` format
 
 ```
 
-- `SpiderId`: id of the spider to use
+- `SpiderId`: id of the spider to use. currently only one is accepted: `imdb`
 - `OutputFile`: relative or absolute path to the `Json` outputs
 - `Title` : search the title
 - `Filters` : optional filters. default is `countries=US&languages=FR&count=10`

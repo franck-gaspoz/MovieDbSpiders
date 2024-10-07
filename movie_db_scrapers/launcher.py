@@ -6,14 +6,18 @@ settings = get_project_settings()
 
 # intro
 
-sys.stdout.write('MovieDbScraper 1.1.0\n')
+sys.stdout.write('| MovieDbScraper 1.1.0 |\n')
 
+settings.set('BOT_NAME','movie_db_scrapers')
+settings.set('SPIDER_MODULES',['movie_db_scrapers.spiders'])
+settings.set('NEWSPIDER_MODULE','movie_db_scrapers.spiders')
+settings.set('ROBOTSTXT_OBEY',True)
 
 def help():
-    sys.stdout.write('----------------------------------------------------------------------------------\n')
-    sys.stdout.write('website crawler | scrape movies information and then store the data in json format\n')
-    sys.stdout.write('project link: https://github.com/franck-gaspoz/MovieDbScraper\n')
-    sys.stdout.write('----------------------------------------------------------------------------------\n')
+    sys.stdout.write('| ----------------------------------------------------------------------------------\n')
+    sys.stdout.write('|  website crawler | scrape movies information and then store the data in json format\n')
+    sys.stdout.write('|  project link: https://github.com/franck-gaspoz/MovieDbScraper\n')
+    sys.stdout.write('| ----------------------------------------------------------------------------------\n')
     sys.stdout.write('\n')
     sys.stdout.write('arguments:\n')
     sys.stdout.write('----------\n')
@@ -29,7 +33,7 @@ def help():
 # default output file
 outputFile = None
 # default title
-title = ''
+title = None
 # default filters
 filters = None
 # scraper id

@@ -33,6 +33,7 @@ CACHE_CONTROL = 'no-cache'
 
 DEFAULT_REQUEST_HEADERS = "DEFAULT_REQUEST_HEADERS"
 
+
 class ImdbSpider(CrawlSpider):
     name = 'imdb'
     allowed_domains = ['imdb.com']

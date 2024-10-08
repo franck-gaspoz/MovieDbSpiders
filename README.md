@@ -17,31 +17,41 @@ this software scrap movies' information and then store the data in `json` format
 
 ## Get & Run release
 
-### Download:
+### Download a  release:
 
+- [MovieDbScrapper-Windows-64bit-intel-1.1.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.1.0)
 - [MovieDbScrapper-Windows-64bit-intel-1.0.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.0.0)
+
+links to a standalone executable (windows,64bit intel) and release source archive
 
 ### Usage:
 
 ```bash
 # run the crawler:
+#  - choose which spider to use
 #  - search for movies having <Title>
 #  - eventually use extended filters if specified in <Filters>
-#  - output to json files
-
-# syntax :
-# ./movie-db-scrapper-1.0.0.exe <ScraperId> <OutputFile> <Title> [<Filters>]
+#  - output to a json file
 
 # exemple:
 
-./movie-db-scrapper-1.0.0.exe imdb movie.json "Any movie" countries=US&languages=US&count=10
-
+./movie-db-scrapper-1.1.0.exe imdb movies.json "Any movie" countries=US&languages=US&count=10
 ```
+
+#### syntaxes:
+
+- `<SpiderId> <OutputFile> <Title> [<Filters>]`
+- `-l | --list`
+- `-h | --help`
+
+#### arguments:
 
 - `SpiderId`: id of the spider to use. currently only one is accepted: `imdb`
 - `OutputFile`: relative or absolute path to the `Json` outputs
 - `Title` : search the title
 - `Filters` : optional filters. default is `countries=US&languages=FR&count=10`
+- `-l | --list` : dump spiders ids (one per line)
+- `-h | --help` : dump the help
 
 ## Install & run / develop
 
@@ -222,19 +232,22 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
 
 ```bash
 $ cd MovieDbScraper/movie_db_scrapers
-(MovieDbScraper/movie_db_scrapers) $ ./publish.bat
+(MovieDbScraper/movie_db_scrapers) $ ./publish.bat 1.1.0
 ```
 
-this will build a file `launcher.exe` in the `/dist` folder
+this will build the file `movie-db-scrapper-windows-64bit-intel-1.1.0.exe` in the `/dist` folder
 
 ## Releases
 
-1.1.0 - 2024/05/20 - support for multiple spiders
+1.1.0 - 2024/08/10 - support for multiple spiders
 
 - refactoring: imdb-scrapper -> movie_db_scrappers
+- move settings to launcher
 - command line improvements (launcher.py)
+- fix bug call executable from any path module error
+- minor bugs fixes
 
-1.0.0 - 2024/05/20 - initial version
+1.0.0 - 2024/20/05 - initial version
 
 - scrap from command line
 

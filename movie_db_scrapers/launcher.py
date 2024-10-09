@@ -14,7 +14,7 @@ settings.set('ROBOTSTXT_OBEY', True)
 SPIDERS_LIST = ['imdb']
 
 
-def title():
+def dump_title():
     sys.stdout.write('| MovieDbScraper 1.1.0 |\n')
 
 
@@ -66,7 +66,7 @@ spiderId = None
 k = len(sys.argv)
 
 if k == 2 and sys.argv[1] == '-h' or sys.argv[1] == '--help':
-    title()
+    dump_title()
     help()
     sys.exit(0)
 
@@ -74,7 +74,7 @@ if k == 2 and sys.argv[1] == '-l' or sys.argv[1] == '--list':
     list_spiders()
     sys.exit(0)
 
-title()
+dump_title()
 
 if k > 1:
     spiderId = sys.argv[1]

@@ -4,8 +4,6 @@
 @rem   <nover> : version number
 @rem   example: publish.bar 1.1.0
 
-pipenv shell
-
 del .\dist\M*
 del dist/launcher.exe
 

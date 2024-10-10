@@ -47,7 +47,7 @@ def help():
 
 def list_spiders():
     for spiderI in SPIDERS_LIST:
-        sys.stdout.write(spiderI+'\n')
+        sys.stdout.write(spiderI + '\n')
 
 
 # default output file
@@ -89,7 +89,7 @@ if k < 4 or len(sys.argv) > 5:
     help()
     sys.stderr.write("ERROR:\n")
     sys.stderr.write('bad number of parameters. expected: 1, or 3 or 4, but got: ' + str(len(sys.argv) - 1) + '\n')
-    sys.exit(0)
+    sys.exit(1)
 
 sys.stdout.write('## outputFile=' + outputFile + '\n')
 sys.stdout.write('## spiderId=' + spiderId + '\n')
@@ -110,11 +110,11 @@ settings.get('FEEDS').update(feeds)
 process = CrawlerProcess(settings)
 
 cl = None
-if spiderId=='imdb':
+if spiderId == 'imdb':
     cl = ImdbSpider
 if cl is None:
-    sys.stderr.write('spider unknown: '+spiderId+'\n')
-    sys.exit(0)
+    sys.stderr.write('spider unknown: ' + spiderId + '\n')
+    sys.exit(2)
 
 process.crawl(cl, title=title, filters=filters)
 process.start()

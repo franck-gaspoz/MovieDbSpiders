@@ -1,10 +1,7 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 import sys
-import os
 from movie_db_scrapers.spiders.imdb import ImdbSpider
-
-#from movie_db_scrapers.movie_db_scrapers.spiders.imdb import ImdbSpider
 
 settings = get_project_settings()
 
@@ -108,38 +105,16 @@ feeds = {outputFile: {
 }}
 settings.get('FEEDS').update(feeds)
 
-# setup modules
-
-
-def we_are_frozen():
-    # All of the modules are built-in to the interpreter, e.g., by py2exe
-    return hasattr(sys, "frozen")
-
-
-def module_path():
-    if we_are_frozen():
-        return os.path.dirname(sys.executable)
-    return os.path.dirname(__file__)
-
-
-#modPath = module_path()
-#sys.stdout.write('modPath='+modPath + '\n')
-#sys.path.append(modPath)
-#baseName = modPath + '/' + os.path.basename(sys.argv[0])
-#sys.stdout.write('baseName='+baseName+'\n')
-#sys.path.append(baseName)
-#sys.stdout.write(str(sys.path)+'\n')
-
-#module = importlib.import_module('movie_db_scrapers.spiders.' + spiderId)
-#sys.stdout.write(str(module)+'\n')
-
-#mclass = getattr( module, spiderId.title() + 'Spider')
-#sys.stdout.write(str(mclass)+'\n')
-
-
 # Create a process
+
 process = CrawlerProcess(settings)
 
-process.crawl(ImdbSpider, title=title, filters=filters)
+cl = None
+if spiderId=='imdb':
+    cl = ImdbSpider
+if cl is None:
+    sys.stderr.write('spider unknown: '+spiderId+'\n')
+    sys.exit(0)
 
+process.crawl(cl, title=title, filters=filters)
 process.start()

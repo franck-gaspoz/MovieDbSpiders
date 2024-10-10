@@ -4,11 +4,12 @@
 @rem   <nover> : version number
 @rem   example: publish.bar 1.1.0
 
+pipenv shell
+
 del .\dist\M*
 del dist/launcher.exe
-@rem pyinstaller --noconfirm --onefile --console --hidden-import ""  ".\launcher.py"
 
-pyinstaller --noconfirm --onefile --hidden-import "movie_db_scrapers" --console ".\launcher.py"
+pyinstaller --paths="C:\Users\franc\PycharmProjects\MovieDbScraper" --paths="C:\Users\franc\PycharmProjects\MovieDbScraper\movie_db_scrapers" --noconfirm --onefile --console ".\launcher.py"
 
 cd dist
 rename "launcher.exe" "movie-db-scrapper-windows-64bit-intel-%1.exe "

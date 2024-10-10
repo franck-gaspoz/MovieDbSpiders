@@ -1,6 +1,10 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 import sys
+import os
+from movie_db_scrapers.spiders.imdb import ImdbSpider
+
+#from movie_db_scrapers.movie_db_scrapers.spiders.imdb import ImdbSpider
 
 settings = get_project_settings()
 
@@ -15,7 +19,7 @@ SPIDERS_LIST = ['imdb']
 
 
 def dump_title():
-    sys.stdout.write('| MovieDbScraper 1.1.0 |\n')
+    sys.stdout.write('| MovieDbScraper 1.1.1 |\n')
 
 
 def sep():
@@ -102,21 +106,40 @@ feeds = {outputFile: {
     'format': 'json',
     'overwrite': True
 }}
-
 settings.get('FEEDS').update(feeds)
 
-module = __import__('movie_db_scrapers.spiders.' + spiderId)
-mclass = getattr(getattr(getattr(
-    module, 'spiders'),
-    spiderId),
-    spiderId.title() + 'Spider')
+# setup modules
+
+
+def we_are_frozen():
+    # All of the modules are built-in to the interpreter, e.g., by py2exe
+    return hasattr(sys, "frozen")
+
+
+def module_path():
+    if we_are_frozen():
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(__file__)
+
+
+#modPath = module_path()
+#sys.stdout.write('modPath='+modPath + '\n')
+#sys.path.append(modPath)
+#baseName = modPath + '/' + os.path.basename(sys.argv[0])
+#sys.stdout.write('baseName='+baseName+'\n')
+#sys.path.append(baseName)
+#sys.stdout.write(str(sys.path)+'\n')
+
+#module = importlib.import_module('movie_db_scrapers.spiders.' + spiderId)
+#sys.stdout.write(str(module)+'\n')
+
+#mclass = getattr( module, spiderId.title() + 'Spider')
+#sys.stdout.write(str(mclass)+'\n')
+
 
 # Create a process
 process = CrawlerProcess(settings)
 
-if filters is not None:
-    process.crawl(mclass, title=title, filters=filters)
-else:
-    process.crawl(mclass, title=title)
+process.crawl(ImdbSpider, title=title, filters=filters)
 
 process.start()

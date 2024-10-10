@@ -1,4 +1,4 @@
-# Movie Db Scraper
+# Movie Db Spiders
 
 ![python](https://img.shields.io/static/v1?label=&message=Python&color=cdf998&style=plastic&logo=python)
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 
@@ -19,7 +19,7 @@ this software scrap movies' information and then store the data in `json` format
 
 ### Download a  release:
 
-- [MovieDbScrapper-Windows-64bit-intel-1.1.1](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.1.1)
+- [MovieDbSpiders-Windows-64bit-intel-1.1.1](https://github.com/franck-gaspoz/MovieDbSpiders/releases/tag/1.1.1)
 
 links to a standalone executable (windows,64bit intel) and release source archive
 
@@ -34,7 +34,7 @@ links to a standalone executable (windows,64bit intel) and release source archiv
 
 # exemple:
 
-./movie-db-scrapper-1.1.0.exe imdb movies.json "Any movie" countries=US&languages=US&count=10
+./movie-db-spiders-1.1.1.exe imdb movies.json "Any movie" count=10
 ```
 
 #### syntaxes:
@@ -54,22 +54,22 @@ links to a standalone executable (windows,64bit intel) and release source archiv
 
 ## Install & run / develop
 
-1. Clone the repo and navigate into `IMDBsScraper` folder.
+1. Clone the repo and navigate into `MovieDbSpiders` folder.
 ```bash
 $ git clone https://github.com/franck-gaspoz/MovieDbScraper.git
-$ cd MovieDbScraper/
+$ cd MovieDbSpiders/
 ```
 2. Create and activate a virtual environment.
 ```bash
-(MovieDbScraper) $ pipenv shell
+(MovieDbSpiders) $ pipenv shell
 ```
 3. Install all dependencies.
 ```bash
-(MovieDbScraper)$ pipenv install
+(MovieDbSpiders)$ pipenv install
 ```
 4. Navigate into `imdb_scraper` folder.
 ```bash
-(MovieDbScraper) $ cd movie_db_scrapers/
+(MovieDbSpiders) $ cd movie_db_scrapers/
 ```
 
 5. Start the crawler named `imdb` :
@@ -230,13 +230,17 @@ These are the **FINAL** stats when the default `SEARCH_QUERY` is used.
 ## Build a standalone executable
 
 ```bash
-$ cd MovieDbScraper/movie_db_scrapers
-(MovieDbScraper/movie_db_scrapers) $ ./publish.bat 1.1.0
+$ cd MovieDbSpiders/movie_db_scrapers
+(MovieDbSpiders/movie_db_scrapers) $ ./publish.bat 1.1.1
 ```
 
-this will build the file `movie-db-scrapper-windows-64bit-intel-1.1.0.exe` in the `/dist` folder
+this will build the file `movie-db-spiders-windows-64bit-intel-1.1.1.exe` in the `/dist` folder
 
 ## Releases
+
+1.1.1 - 2024/10/10 - fix launcher
+
+- fix error module not found when called from remote directory
 
 1.1.0 - 2024/08/10 - support for multiple spiders
 
@@ -252,7 +256,7 @@ this will build the file `movie-db-scrapper-windows-64bit-intel-1.1.0.exe` in th
 
 ## Notes
 
-This project is a based on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
+This project is based on the project `MovieDbSpiders` on GitHub: [/MovieDbSpiders/blob/master/README.md](https://github.com/franck-gaspoz/MovieDbSpiders/blob/master/README.md) and on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
 
 ## Disclaimer
 

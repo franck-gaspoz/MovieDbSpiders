@@ -10,5 +10,5 @@ del dist/launcher.exe
 pyinstaller --noconfirm --onefile --console ".\launcher.py"
 
 cd dist
-rename "launcher.exe" "movie-db-scrapper-windows-64bit-intel-%1.exe "
+rename "launcher.exe" "movie-db-spiders-windows-64bit-intel-%1.exe"
 dir

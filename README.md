@@ -19,8 +19,7 @@ this software scrap movies' information and then store the data in `json` format
 
 ### Download a  release:
 
-- [MovieDbScrapper-Windows-64bit-intel-1.1.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.1.0)
-- [MovieDbScrapper-Windows-64bit-intel-1.0.0](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.0.0)
+- [MovieDbScrapper-Windows-64bit-intel-1.1.1](https://github.com/franck-gaspoz/MovieDbScraper/releases/tag/1.1.1)
 
 links to a standalone executable (windows,64bit intel) and release source archive
 

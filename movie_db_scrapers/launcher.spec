@@ -3,7 +3,7 @@
 
 a = Analysis(
     ['launcher.py'],
-    pathex=['C:\\Users\\franc\\PycharmProjects\\MovieDbScraper', 'C:\\Users\\franc\\PycharmProjects\\MovieDbScraper\\movie_db_scrapers'],
+    pathex=[],
     binaries=[],
     datas=[],
     hiddenimports=[],

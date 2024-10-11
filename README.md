@@ -4,7 +4,7 @@
 ![json](https://img.shields.io/static/v1?label=&message=JSON&color=cdf998&style=plastic&logo=javascript&logoColor=darkgreen) 
 ![linux](https://img.shields.io/static/v1?label=&message=Linux&color=285fdd&style=plastic&logo=linux) ![windows](https://img.shields.io/static/v1?label=&message=Windows&color=285fdd&style=plastic&logo=windows&logoColor=77DDFF) ![osx](https://img.shields.io/static/v1?label=&message=OSX&color=285fdd&style=plastic&logo=apple&logoColor=AAFFAA)
 
-![release](https://img.shields.io/github/release-date-pre/franck-gaspoz/MovieDbSpiders?&style=plastic&label=release)
+![release](https://img.shields.io/github/release-date-pre/franck-gaspoz/MovieDbSpiders?&style=plastic&label=release) 
 ![release](https://img.shields.io/github/v/release/franck-gaspoz/MovieDbSpiders?&style=plastic&label=)
 
 ## Overview

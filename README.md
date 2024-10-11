@@ -256,7 +256,7 @@ this will build the file `movie-db-spiders-windows-64bit-intel-1.1.1.exe` in the
 
 ## Notes
 
-This project is based on the project `MovieDbSpiders` on GitHub: [/MovieDbSpiders/blob/master/README.md](https://github.com/franck-gaspoz/MovieDbSpiders/blob/master/README.md) and on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
+This project is based on the project `MovieDbScrapers` on GitHub: [/MovieDbScraper/blob/master/README.md](https://github.com/franck-gaspoz/MovieDbScraper/blob/master/README.md) and on a fork of the project [https://github.com/dojutsu-user/IMDB-Scraper](https://github.com/dojutsu-user/IMDB-Scraper) from **Vaibhav Gupta** (2018,MIT)
 
 ## Disclaimer
 

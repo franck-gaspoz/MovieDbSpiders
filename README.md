@@ -59,14 +59,10 @@ links to a standalone executable (windows,64bit intel) and release source archiv
 $ git clone https://github.com/franck-gaspoz/MovieDbScraper.git
 $ cd MovieDbSpiders/
 ```
-2. Create and activate a virtual environment.
-```bash
-(MovieDbSpiders) $ pipenv shell
-```
+2. Create and activate a virtual environment (PyCharm, pipenv, ...)
+
 3. Install all dependencies.
-```bash
-(MovieDbSpiders)$ pipenv install
-```
+
 4. Navigate into `imdb_scraper` folder.
 ```bash
 (MovieDbSpiders) $ cd movie_db_scrapers/
